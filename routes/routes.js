@@ -46,14 +46,14 @@ module.exports = function(app) {
   app.put(baseUrl + '/entries/:id', function(req,res){
     var entry = req.body;
     delete entry._id;
-    Entry.findOneAndUpdate({"_id":req.params.id}, function(err, entry){
+    Entry.findOneAndUpdate({"_id":req.params.id}, entry, function(err, entry){
       handle(res,err,entry);
     });
   });
 
   // delete (destroy)
   app.delete(baseUrl + '/entries/:id', function(req,res){
-    Entry.remove({"_id":req.params.id}, function(res, entry){
+    Entry.remove({"_id":req.params.id}, function(err, entry){
       handle(res,err,{"msg":"deleted"});
     });
   });
