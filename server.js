@@ -17,7 +17,7 @@ var mongoose = require('mongoose');
 
 var app = express(); // initialize express
 
-mongoose.connect( process.env.MONGO_URL || 'mongodb://localhost/resource-catalogue' );
+mongoose.connect( process.env.MONGOLAB_URI || process.env.MONGO_URL || 'mongodb://localhost/resource-catalogue' );
 
 app.use(bodyparser.json());
 require('./routes/routes')(app);
