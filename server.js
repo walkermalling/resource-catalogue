@@ -19,6 +19,10 @@ var app = express(); // initialize express
 
 mongoose.connect( process.env.MONGOLAB_URI || process.env.MONGO_URL || 'mongodb://localhost/resource-catalogue' );
 
+app.use(express.static(__dirname + (process.env.STATIC_DIR || '/build')));
+
+
+
 app.use(bodyparser.json());
 require('./routes/routes')(app);
 
@@ -27,5 +31,5 @@ var server = http.createServer(app);
 app.set('port', process.env.PORT || 3000 );
 
 server.listen(app.get('port'), function() {
-  console.log('Server running');
+  console.log('Server running on ' + app.get('port'));
 });
